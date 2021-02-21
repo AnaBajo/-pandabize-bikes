@@ -1,0 +1,12 @@
+<div class="container">
+  <%= simple_form_for(@bike) do |f|  %>
+    <%= f.input :name, label: 'Bike model name'  %>
+    <%= f.simple_fields_for :customization_categories do |cc|  %>
+      <%= cc.input :bike_element  %>
+      <%= cc.simple_fields_for :customization_options do |co|  %>
+        <%= co.input :option  %>
+      <% end %>
+    <hr><% end %>
+    <%= f.submit  %>
+  <% end %>
+</div>

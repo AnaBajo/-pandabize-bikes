@@ -1,0 +1,19 @@
+<div class="container">
+  <p>Bike Model</p>
+  <%= @bike.name  %>
+  <% @bike.customization_categories.each do |cc|  %>
+    <p>Bike Part</p>
+    <%= cc.bike_element  %>
+    <% cc.customization_options.each do |co| %>
+      <p>Size/Color</p>
+      <%= co.option  %>
+      <%= simple_form_for([@bike, @limitation]) do |l|   %>
+        <%= l.input :customization_category, collection: (@bike.customization_categories.reject {|cat| cat == cc}), label_method: :bike_element  %>
+
+      <% end %>
+    <% end %>
+  <% end %>
+
+
+
+</div>

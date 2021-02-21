@@ -10,9 +10,60 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 0) do
+ActiveRecord::Schema.define(version: 2021_02_21_193025) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "bikes", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "customization_categories", force: :cascade do |t|
+    t.string "bike_element"
+    t.integer "bike_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "customization_options", force: :cascade do |t|
+    t.string "option"
+    t.integer "customization_category_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "limitations", force: :cascade do |t|
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "customization_categories_id"
+    t.bigint "customization_options_id"
+    t.integer "allowed_options_ids", default: [], array: true
+    t.index ["customization_categories_id"], name: "index_limitations_on_customization_categories_id"
+    t.index ["customization_options_id"], name: "index_limitations_on_customization_options_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.string "bike_id_integer"
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "purchased_customizations", force: :cascade do |t|
+    t.integer "order_id"
+    t.integer "customization_option_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.boolean "admin"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
 end
