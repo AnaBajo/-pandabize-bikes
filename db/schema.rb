@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_02_21_193025) do
+ActiveRecord::Schema.define(version: 2021_02_22_163741) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,11 +38,11 @@ ActiveRecord::Schema.define(version: 2021_02_21_193025) do
   create_table "limitations", force: :cascade do |t|
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.bigint "customization_categories_id"
-    t.bigint "customization_options_id"
     t.integer "allowed_options_ids", default: [], array: true
-    t.index ["customization_categories_id"], name: "index_limitations_on_customization_categories_id"
-    t.index ["customization_options_id"], name: "index_limitations_on_customization_options_id"
+    t.bigint "customization_category_id"
+    t.bigint "customization_option_id"
+    t.index ["customization_category_id"], name: "index_limitations_on_customization_category_id"
+    t.index ["customization_option_id"], name: "index_limitations_on_customization_option_id"
   end
 
   create_table "orders", force: :cascade do |t|
