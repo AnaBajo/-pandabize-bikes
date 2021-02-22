@@ -2,11 +2,17 @@
   <%= simple_form_for(@bike) do |f|  %>
     <%= f.input :name, label: 'Bike model name'  %>
     <%= f.simple_fields_for :customization_categories do |cc|  %>
-      <%= cc.input :bike_element  %>
-      <%= cc.simple_fields_for :customization_options do |co|  %>
-        <%= co.input :option  %>
-      <% end %>
-    <hr><% end %>
+      <hr><div class="d-flex">
+        <div>
+          <%= cc.input :bike_element  %>
+        </div>
+        <div>
+          <%= cc.simple_fields_for :customization_options do |co|  %>
+            <%= co.input :option  %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
     <%= f.submit  %>
   <% end %>
 </div>

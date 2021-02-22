@@ -1,19 +1,28 @@
 <div class="container">
-  <p>Bike Model</p>
-  <%= @bike.name  %>
-  <% @bike.customization_categories.each do |cc|  %>
-    <p>Bike Part</p>
-    <%= cc.bike_element  %>
-    <% cc.customization_options.each do |co| %>
-      <p>Size/Color</p>
-      <%= co.option  %>
-      <%= simple_form_for([@bike, @limitation]) do |l|   %>
-        <%= l.input :customization_category, collection: (@bike.customization_categories.reject {|cat| cat == cc}), label_method: :bike_element  %>
+  <div class="d-flex">
+    <p>Bike Model :</p>
+    <%= @bike.name  %>
+  </div>
+  <div class="">
+    <% @bike.customization_categories.each do |cc|  %>
+      <hr><div class="d-flex">
+        <p>Bike Part :</p>
+        <%= cc.bike_element  %>
+      </div>
+      <% cc.customization_options.each do |co| %>
+        <div class="d-flex justify-content-between">
+          <p>Size/Color :</p>
+          <%= co.option  %>
+          <%= simple_form_for([@bike, @limitation]) do |bl|   %>
+            <div class="d-flex justify-content-between">
+              <p>Dependent customizations :</p>
+              <%= bl.input :customization_category, collection: (@bike.customization_categories.reject {|cat| cat == cc}), label_method: :bike_element  %>
 
+            </div>
+            <%= bl.submit  %>
+          <% end %>
+        </div>
       <% end %>
     <% end %>
-  <% end %>
-
-
-
+  </div>
 </div>
