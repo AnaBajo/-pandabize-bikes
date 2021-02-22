@@ -19,7 +19,10 @@ class BikesController < ApplicationController
     else
       render :new
     end
+  end
 
+  def show
+    @bike = Bike.find(params[:id])
   end
 
   def destroy

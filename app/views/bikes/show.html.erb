@@ -1,0 +1,14 @@
+<div class="container">
+  <h2><%= @bike.name  %></h2>
+  <div>
+    <% @bike.customization_categories.each do |cc|  %>
+      <div class="d-flex">
+        <p><%= cc.bike_element %> &nbsp</p>
+          <% cc.customization_options.each do |co|  %>
+          <p><%= co.option %> &nbsp</p>
+          <% end %>
+        </p>
+      </div>
+    <% end %>
+  </div>
+</div>
